@@ -1,6 +1,6 @@
 # ICT Topics Research
 
-![](https://w.wallhaven.cc/full/47/wallhaven-47wpz3.png)
+![banner](https://w.wallhaven.cc/full/47/wallhaven-47wpz3.png)
 
 **Name**: Aleksandar Rangelov \
 **Student Number**: 572601 \
@@ -19,6 +19,7 @@
 
 
 ## Summary {#summary}
+
 - [x] AI Basics
 - [ ] Business IT & Data Analysis
 - [x] Intelligent Technologies
@@ -28,7 +29,7 @@
 
 ## Topics
 
-### AI Basics {#ai-basics}
+### AI Basics {#ai}
 
 AI is separated into these sub-topics:
 
