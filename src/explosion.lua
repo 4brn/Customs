@@ -4,7 +4,7 @@ function init_explosion()
 end
 
 function add_explosion(x, y)
-    for particle = 0, 20 do
+    for i = 0, 20 do
         add(
             explosion, {
                 x = x,
@@ -16,17 +16,19 @@ function add_explosion(x, y)
             }
         )
     end
-    sfx(rnd(3))
+    sfx(0)
 end
 
 function update_explosion()
     for particle in all(explosion) do
         particle.x = particle.x + particle.dx
         particle.y = particle.y + particle.dy
-        particle.scale = particle.scale - 0.3
+        particle.scale = particle.scale - 0.2
         particle.life = particle.life - 0.2
         particle.color = colors[flr(particle.life)]
-        if particle.life <= 0 then del(explosions, particle) end
+        if particle.life <= 0 then
+            del(explosion, particle)
+        end
     end
 end
 
