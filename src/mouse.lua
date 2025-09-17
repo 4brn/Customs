@@ -30,7 +30,7 @@ function update_mouse()
         add_explosion(mouse.x, mouse.y)
         mouse.delay = 1
     else
-        mouse.delay = mouse.delay - 0.2
+        mouse.delay = mouse.delay - 0.1
     end
 
     mouse.mode = mouse.state == 2 and 2 or 1
