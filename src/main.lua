@@ -11,8 +11,8 @@ end
 function _update60()
     update_mouse()
     update_explosion()
+    update_debug()
 
-    if stat(31) == "d" then debug_active = not debug_active end
 end
 
 function _draw()
@@ -22,5 +22,5 @@ function _draw()
     draw_explosion()
     draw_mouse()
 
-    debug_mode()
+    draw_debug()
 end
