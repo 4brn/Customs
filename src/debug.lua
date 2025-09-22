@@ -19,9 +19,11 @@ end
 
 function draw_debug()
     if debug_active then
+        rectfill(0,0,127,20,0)
         mouse_data()
         explosion_data()
         entity_data()
+        keyboard_data()
     end
 end
 
@@ -41,5 +43,10 @@ end
 function entity_data()
     cursor(57,2,7)
     print("nttys:"..#Entities)
-    print("slctd:".. (selected == nil and "nil" or selected))
+    print("slctd:".. (entity_selected == nil and "none" or entity_selected))
+end
+
+function keyboard_data()
+    cursor(97,2,7)
+    print("kb:" .. stat(31))
 end

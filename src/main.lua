@@ -1,5 +1,6 @@
 function _init()
     init_mouse()
+    init_belts()
     init_entities()
     init_areas()
     init_explosion()
@@ -18,8 +19,9 @@ function _draw()
     cls(3) -- green background
     map()
     draw_areas()
+    draw_belts()
     draw_entities()
     draw_explosion()
-    draw_mouse()
     draw_debug()
+    draw_mouse()
 end

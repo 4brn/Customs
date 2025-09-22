@@ -1,15 +1,15 @@
-local padding = 5
 local safe_sprites = {4}
-local dangerous_sprites = {6}
+local dangerous_sprites = {6, 8}
 
 function init_entities()
     Entities = {}
 
+    dragging = false
     entity_id_counter = 0
     entity_selected = nil
 
-    add_entity(20,20, false)
-    add_entity(50,50, true)
+    add_entity(0,40,false)
+    add_entity(0,60,false)
 end
 
 function add_entity(x, y, dangerous)
@@ -24,8 +24,8 @@ function add_entity(x, y, dangerous)
         id = entity_id_counter,
         x = x,
         y = y,
-        dx = 0.1,
-        dy = 0.1,
+        dx = 0,
+        dy = 0,
         size = 16,
         sprite = sprite,
         safe = safe,
@@ -45,30 +45,37 @@ end
 function update_entities()
     for i = #Entities, 1, -1 do
         local entity = Entities[i]
-        if inside_entity(entity) then
-            entity_selected = entity.id
 
+        -- collision
+        -- if entity.x < 0 then entity.x = 0 end
+        -- if entity.y < 0 then entity.y = 0 end
+        -- if entity.x + entity.size > 127 then entity.x = 127 - entity.size  end
+        -- if entity.y + entity.size > 127 then entity.y = 127 - entity.size  end
+
+        -- dragging
+        if inside_entity(entity) then
+            mouse.mode = 3
             if mouse_clicked("left") then
+                mouse.mode = 2
+                dragging = true
+                entity_selected = entity.id
                 entity.x = mouse.x - 6
                 entity.y = mouse.y - 6
 
                 del(Entities, entity)
                 add(Entities, entity)
                 break
+            else
+                if inside_area(entity.x + 8, entity.y + 8) then
+                    add_explosion(entity.x + 8, entity.y + 8)
+                    del(Entities, entity)
+                end
+                dragging = false
             end
         else
             entity_selected = nil
         end
     end
-
-    for entity in all(Entities) do
-        entity.x = entity.x + entity.dx
-        if entity.x < 0 then entity.x = 0 end
-        if entity.y < 0 then entity.y = 0 end
-        if entity.x + entity.size > 127 then entity.x = 127 - entity.size  end
-        if entity.y + entity.size > 127 then entity.y = 127 - entity.size  end
-    end
-
 end
 
 function draw_entities()
