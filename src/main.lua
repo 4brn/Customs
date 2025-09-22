@@ -11,12 +11,12 @@ function _update60()
     update_entities()
     update_explosion()
     update_debug()
+    update_color()
 end
 
 function _draw()
     cls(3) -- green background
     map()
-
     draw_areas()
     draw_entities()
     draw_explosion()
