@@ -12,15 +12,16 @@ end
 function add_explosion(x, y)
     if inside_area(x, y) then
         for i = 0, particle_count do
-            local particle = {
-                x = x,
-                y = y,
-                dx = 1 - rnd(2),
-                dy = 1 - rnd(2),
-                scale = 2 + rnd(max_scale),
-                life = life
-            }
-            add(explosion, particle)
+            add(explosion,
+                {
+                    x = x,
+                    y = y,
+                    dx = 1 - rnd(2),
+                    dy = 1 - rnd(2),
+                    scale = 2 + rnd(max_scale),
+                    life = life
+                }
+            )
         end
         sfx(0)
     end

@@ -1,12 +1,12 @@
 local bitmap = {
-    [0] = "none",
-    [1] = "left",
-    [2] = "right",
+    [0] = "nil",
+    [1] = "l",
+    [2] = "r",
     [3] = "l+r",
-    [4] = "mid",
-    [5] = "l+mid",
-    [6] = "mid+r",
-    [7] = "l+mid+r"
+    [4] = "m",
+    [5] = "l+m",
+    [6] = "m+r",
+    [7] = "l+m+r"
 }
 
 function init_debug()
@@ -21,6 +21,7 @@ function draw_debug()
     if debug_active then
         mouse_data()
         explosion_data()
+        entity_data()
     end
 end
 
@@ -32,7 +33,13 @@ function mouse_data()
 end
 
 function explosion_data()
-    cursor(30,2,7)
-    print("expl:" .. (#explosion % particle_count))
-    print("areas:" .. #areas)
+    cursor(27,2,7)
+    print("xpls:" .. (#explosion % particle_count))
+    print("reas:" .. #areas)
+end
+
+function entity_data()
+    cursor(57,2,7)
+    print("nttys:"..#Entities)
+    print("slctd:".. (selected == nil and "nil" or selected))
 end

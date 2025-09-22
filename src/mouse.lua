@@ -1,3 +1,6 @@
+local mouse_sprites = {1, 2} -- 1 => normal, 2 => drag
+local buttons = {left = 1, right = 2, middle = 4}
+
 function init_mouse()
     mouse = {}
     mouse.x = 64
@@ -5,17 +8,16 @@ function init_mouse()
     mouse.state = 1
     mouse.delay = 0
 
-    mouse.sprites = {1, 2} -- 1 => normal, 2 => drag
     mouse.mode = 1
 end
 
 function mouse_clicked(button)
-    local buttons = {left = 1, right = 2, middle = 4}
     if mouse.state == buttons[button] then return true end
 
     return false
 end
 
+-- may be deleted
 function handle_click()
     if mouse_clicked("left") and mouse.delay <= 0 then
         add_explosion(mouse.x, mouse.y)
@@ -39,8 +41,13 @@ function update_mouse()
     -- use dragging mouse sprite while holding left click
     mouse.mode = mouse.state == 1 and 2 or 1
     handle_click()
+
+    if mouse.x < 0 then mouse.x = 0 end
+    if mouse.y < 0 then mouse.y = 0 end
+    if mouse.x + 8 > 127 then mouse.x = 127 - 8 end
+    if mouse.y + 8 > 127 then mouse.y = 127 - 8 end
 end
 
 function draw_mouse()
-    spr(mouse.sprites[mouse.mode], mouse.x, mouse.y)
+    spr(mouse_sprites[mouse.mode], mouse.x, mouse.y)
 end
