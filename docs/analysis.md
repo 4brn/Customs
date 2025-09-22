@@ -37,7 +37,7 @@ The game takes place exactly after a checked luggage gets put on a conveyor belt
 
 ### PICO-8
 
-PICO-8 [^1] is an 8 bit console emulation with a full fledged game development toolset. It features a coding environment, sprite creation, tile-map creation, audio and sound creation tools baked into the console, making for a compact portable development environment.	
+PICO-8 [^1] is an 8 bit console emulation with a full fledged game development tool set. It features a coding environment, sprite creation, tile-map creation, audio and sound creation tools baked into the console, making for a compact portable development environment.	
 
 | Specification | Limit                 |
 | ------------- | --------------------- |
