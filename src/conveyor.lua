@@ -18,7 +18,7 @@ end
 function draw_belts()
     for belt in all(belts) do
         for tile in all(belt.tiles) do
-            spr(belt_sprites[tile.type], tile.x, tile.y, 2,2,belt.flipped)
+            spr(belt_sprites[tile.type], tile.x, belt.y, 2,2,belt.flipped)
         end
     end
 end
@@ -52,7 +52,7 @@ function generate_belt(y, flipped)
 
         add(belt.tiles, {
             x = i,
-            y = y,
+            -- y = y,
             type = type,
         })
     end
@@ -60,13 +60,13 @@ function generate_belt(y, flipped)
     add(belts, belt)
 end
 
--- function on_belt(entity)
---     for index,belt in pairs(belts) do
---         if (entity.x >= 0 and entity.y >= belt.y) and
---         (entity.x + entity.size <= 127 + size and entity.y + entity.size <= belt.y - size ) then
---             return index
---         end
---     end
+function on_belt(obj)
+    local y = obj.y
+    for index,belt in pairs(belts) do
+        if y + 8 > belt.y and y + 8 < belt.y + 16 then
+            return true, index
+        end
+    end
 
---     return nil
--- end
+    return false, nil
+end

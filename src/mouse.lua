@@ -6,7 +6,6 @@ function init_mouse()
     mouse.x = 64
     mouse.y = 64
     mouse.state = 0
-    mouse.delay = 0
 
     mouse.mode = 1
 end
@@ -14,16 +13,6 @@ end
 function mouse_clicked(button)
     if mouse.state == buttons[button] then return true end
     return false
-end
-
--- may be deleted
-function handle_click()
-    if mouse_clicked("left") and mouse.delay <= 0 then
-        add_explosion(mouse.x, mouse.y)
-        mouse.delay = 2
-    else
-        mouse.delay = mouse.delay - 0.1
-    end
 end
 
 -- stat(30) => keyboard key pressed

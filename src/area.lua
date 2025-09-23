@@ -30,9 +30,8 @@ end
 
 function draw_areas()
     for a in all(areas) do
-        ovalfill(a.x, a.y, a.x + a.width, a.y + a.height, 5)
-        oval(a.x, a.y, a.x + a.width, a.y + a.height, 0)
-        ovalfill(a.x, a.y + 4, a.x + a.width, a.y + a.height + 4, area_colors.fill)
-        oval(a.x, a.y + 4, a.x + a.width, a.y + a.height + 4, 0)
+        ovalfill(a.x + 1, a.y, a.x - 1 + a.width, a.y + a.height, 5)
+        ovalfill(a.x + 1, a.y + 3, a.x + a.width - 1, a.y + a.height + 4, area_colors.fill)
+        oval(a.x, a.y - 1, a.x + a.width, a.y + a.height + 5, 6)
     end
 end

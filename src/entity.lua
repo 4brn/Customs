@@ -29,6 +29,7 @@ function add_entity(x, y, dangerous)
         size = 16,
         sprite = sprite,
         safe = safe,
+        on_belt = nil
     }
     )
 end
@@ -36,6 +37,7 @@ end
 function inside_entity(entity)
     if (mouse.x > entity.x and mouse.y > entity.y)
         and (mouse.x < entity.x + entity.size and mouse.y < entity.y + entity.size) then
+        mouse.mode = 3
         return true
     end
 
@@ -46,6 +48,14 @@ function update_entities()
     for i = #Entities, 1, -1 do
         local entity = Entities[i]
 
+        is_on_belt, belt_index = on_belt(entity)
+        entity.on_belt = is_on_belt and true or false
+        if belt_index ~= nil then
+            entity.dx = belts[belt_index].dx
+        else
+            entity.dx = 0
+        end
+
         -- collision
         -- if entity.x < 0 then entity.x = 0 end
         -- if entity.y < 0 then entity.y = 0 end
@@ -53,28 +63,27 @@ function update_entities()
         -- if entity.y + entity.size > 127 then entity.y = 127 - entity.size  end
 
         -- dragging
-        if inside_entity(entity) then
-            mouse.mode = 3
-            if mouse_clicked("left") then
-                mouse.mode = 2
-                dragging = true
-                entity_selected = entity.id
-                entity.x = mouse.x - 6
-                entity.y = mouse.y - 6
+        if inside_entity(entity) and mouse_clicked("left") then
+            dragging = true
+            entity.x = mouse.x - 6
+            entity.y = mouse.y - 6
+            entity_selected = entity.id
 
-                del(Entities, entity)
-                add(Entities, entity)
-                break
-            else
-                if inside_area(entity.x + 8, entity.y + 8) then
-                    add_explosion(entity.x + 8, entity.y + 8)
-                    del(Entities, entity)
-                end
-                dragging = false
-            end
+            del(Entities, entity)
+            add(Entities, entity)
+
+            mouse.mode = 2
+            break
         else
+            if inside_area(entity.x + 8, entity.y + 8) then
+                del(Entities, entity)
+                add_explosion(entity.x + 8, entity.y + 8)
+            end
+            dragging = false
             entity_selected = nil
         end
+
+        entity.x = entity.x + entity.dx
     end
 end
 

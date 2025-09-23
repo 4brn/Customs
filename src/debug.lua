@@ -23,7 +23,7 @@ function draw_debug()
         mouse_data()
         explosion_data()
         entity_data()
-        keyboard_data()
+        belt_data()
     end
 end
 
@@ -43,10 +43,13 @@ end
 function entity_data()
     cursor(57,2,7)
     print("nttys:"..#Entities)
-    print("slctd:".. (entity_selected == nil and "none" or entity_selected))
+    print("slctd:".. (entity_selected == nil and 0 or entity_selected))
 end
 
-function keyboard_data()
-    cursor(97,2,7)
-    print("kb:" .. stat(31))
+function belt_data()
+    cursor(97, 2, 7)
+    -- print(belt_info.index)
+    -- print(#belt_info.belt.tiles)
+    -- print(on_belt(mouse), 7)
+    -- print(Entities[1].on_belt, 7)
 end
