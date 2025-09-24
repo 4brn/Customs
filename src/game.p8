@@ -1,9 +1,10 @@
 pico-8 cartridge // http://www.pico-8.com
 version 43
 __lua__
+#include settings.lua
 #include main.lua
 #include mouse.lua
-#include conveyor.lua
+#include belt.lua
 #include entity.lua
 #include area.lua
 #include explosion.lua

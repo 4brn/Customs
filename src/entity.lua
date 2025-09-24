@@ -1,11 +1,7 @@
-local safe_sprites = {64}
-local dangerous_sprites = {66, 68}
-local entity_spawn_rate = 20
-
 function init_entities()
     Entities = {}
 
-    spawn_rate = entity_spawn_rate
+    spawn_delay = framerate / entity_spawn_rate
     dragging = false
     entity_id_counter = 0
     entity_selected = nil
@@ -25,8 +21,6 @@ function update_entities()
             entity.dx = 0
         end
 
-        -- if entity.x + entity.size > 127 then entity.x = 127 - entity.size  end
-        -- if entity.y + entity.size > 127 then entity.y = 127 - entity.size  end
 
         -- dragging
         if inside_entity(entity) and mouse_clicked("left") then
@@ -80,7 +74,6 @@ function add_entity(dangerous)
         y = belt.y - 3 + flr(rnd(3)),
         dx = 0,
         dy = 0,
-        size = 16,
         sprite = sprite,
         safe = safe,
         on_belt = nil
@@ -90,7 +83,7 @@ end
 
 function inside_entity(entity)
     if (mouse.x > entity.x and mouse.y > entity.y)
-        and (mouse.x < entity.x + entity.size and mouse.y < entity.y + entity.size) then
+        and (mouse.x < entity.x + size and mouse.y < entity.y + size) then
         mouse.mode = 3
         return true
     end
@@ -99,10 +92,10 @@ function inside_entity(entity)
 end
 
 function spawn_entities()
-    if spawn_rate <= 0 and not dragging then
+    if spawn_delay <= 0 and not dragging then
         add_entity()
-        spawn_rate = entity_spawn_rate
+        spawn_delay = framerate / entity_spawn_rate
     else
-        spawn_rate = spawn_rate - 1
+        spawn_delay = spawn_delay - 1
     end
 end

@@ -1,11 +1,3 @@
-local belt_sprites = {
-    start = 4,
-    horizontal = 6,
-    finish = 8,
-}
-local size = 16
-local belt_speed = 1
-
 function init_belts()
     belts = {}
     generate_belt(10, flr(rnd(2)) == 1)
@@ -25,12 +17,22 @@ end
 function generate_belt(y, flipped)
     if flipped == nil then flipped = false end
 
-    local iteration = flipped and -size or size
-    -- WHY IS IT 112 INSTEAD OF 111 ??????????????
-    local start = flipped and 112 or 0
-    local finish = flipped and 0 or 112
-
     local belt = {}
+
+    local iteration
+    local start
+    local finish
+
+    if flipped then
+        iteration = size - (2*size)
+        start = 112
+        finish = 0
+    else
+        start = 0
+        finish = 112
+        iteration = size
+    end
+    -- WHY IS IT 112 INSTEAD OF 111 ??????????????
 
     belt.tiles = {}
     belt.y = y
