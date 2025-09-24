@@ -5,7 +5,6 @@ local life = 5
 local subtraction = 0.2
 
 function init_explosion()
-    -- list of all particles
     explosion = {}
 end
 

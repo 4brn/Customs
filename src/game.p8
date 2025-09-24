@@ -2,6 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 43
 __lua__
 #include settings.lua
+#include menu.lua
 #include main.lua
 #include mouse.lua
 #include belt.lua

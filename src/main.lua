@@ -1,10 +1,14 @@
 function _init()
     init_mouse()
+    init_menu()
+    init_debug()
+
+    set_difficulty(difficulty.job)
+
     init_belts()
     init_entities()
     init_areas()
     init_explosion()
-    init_debug()
 end
 
 function _update60()
