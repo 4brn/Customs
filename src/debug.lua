@@ -36,7 +36,7 @@ end
 
 function explosion_data()
     cursor(27,2,7)
-    print("xpls:" .. (#explosion % particle_count))
+    print("xpls:" .. (#explosion / PARTICLE_COUNT))
     print("reas:" .. #areas)
 end
 

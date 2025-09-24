@@ -1,6 +1,7 @@
 function init_entities()
     Entities = {}
 
+    passed_counter = 0
     spawn_delay = FRAMERATE / ENTITY_SPAWN_RATE
     dragging = false
     entity_id_counter = 0
@@ -39,10 +40,11 @@ function update_entities()
             dragging = false
             entity_selected = nil
 
-            if inside_area(entity.x + 7, entity.y + 7) then
+            if inside_area(entity.x + 8, entity.y + 6) then
                 del(Entities, entity)
-                add_explosion(entity.x + 7, entity.y + 7)
+                add_explosion(entity.x + 8, entity.y + 6)
             elseif is_on_belt and (entity.x < 0 or entity.x > 112) then
+                passed_counter = passed_counter + 1
                 del(Entities, entity)
             else
                 entity.x = entity.x + entity.dx

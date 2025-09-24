@@ -1,9 +1,3 @@
-local EXPLOSION_COLORS = { 5, 9, 10, 7 }
-local PARTICLE_COUNT = 30
-local MAX_SCALE = 6
-local LIFE = 5
-local SUBTRACTION = 0.2
-
 function init_explosion()
     explosion = {}
 end
