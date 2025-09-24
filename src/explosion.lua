@@ -1,12 +1,12 @@
+local colors = { 5, 9, 10, 7 }
+local particle_count = 30
+local max_scale = 6
+local life = 5
+local subtraction = 0.2
+
 function init_explosion()
     -- list of all particles
     explosion = {}
-
-    colors = { 5, 9, 10, 7 }
-    particle_count = 20
-    max_scale = 5
-    life = 5
-    subtraction = 0.2
 end
 
 function add_explosion(x, y)
@@ -43,5 +43,6 @@ end
 function draw_explosion()
     for p in all(explosion) do
         circfill(p.x, p.y, p.scale, p.color)
+        circ(p.x, p.y, p.scale, p.color)
     end
 end

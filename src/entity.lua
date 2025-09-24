@@ -1,29 +1,83 @@
-local safe_sprites = {4}
-local dangerous_sprites = {6, 8}
+local safe_sprites = {64}
+local dangerous_sprites = {66, 68}
+local entity_spawn_rate = 20
 
 function init_entities()
     Entities = {}
 
+    spawn_rate = entity_spawn_rate
     dragging = false
     entity_id_counter = 0
     entity_selected = nil
-
-    add_entity(0,40,false)
-    add_entity(0,60,false)
 end
 
-function add_entity(x, y, dangerous)
+function update_entities()
+    spawn_entities()
+
+    for i = #Entities, 1, -1 do
+        local entity = Entities[i]
+
+        local is_on_belt, belt_index = on_belt(entity)
+        entity.on_belt = is_on_belt
+        if is_on_belt and belt_index ~= nil then
+            entity.dx = belts[belt_index].dx
+        else
+            entity.dx = 0
+        end
+
+        -- if entity.x + entity.size > 127 then entity.x = 127 - entity.size  end
+        -- if entity.y + entity.size > 127 then entity.y = 127 - entity.size  end
+
+        -- dragging
+        if inside_entity(entity) and mouse_clicked("left") then
+            entity.x = mouse.x - 6
+            entity.y = mouse.y - 6
+
+            dragging = true
+            entity_selected = entity.id
+
+            del(Entities, entity)
+            add(Entities, entity)
+
+            mouse.mode = 2
+            break
+        else
+            dragging = false
+            entity_selected = nil
+
+            if inside_area(entity.x + 7, entity.y + 7) then
+                del(Entities, entity)
+                add_explosion(entity.x + 7, entity.y + 7)
+            elseif is_on_belt and (entity.x < 0 or entity.x > 112) then
+                del(Entities, entity)
+            else
+                entity.x = entity.x + entity.dx
+            end
+        end
+    end
+end
+
+function draw_entities()
+    for entity in all(Entities) do
+        spr(entity.sprite, entity.x, entity.y, 2, 2)
+    end
+end
+
+function add_entity(dangerous)
     entity_id_counter = entity_id_counter + 1
 
+    local index = flr(rnd(#belts)) + 1
+    local belt = belts[index]
+
     -- random sprite based on dangerous (true or false)
-    local sprite =  dangerous
+    local sprite =  (flr(rnd(2)) + 1) == 1
     and dangerous_sprites[flr(rnd(#dangerous_sprites)) + 1]
     or safe_sprites[flr(rnd(#safe_sprites)) + 1]
 
     add(Entities, {
         id = entity_id_counter,
-        x = x,
-        y = y,
+        x = belt.flipped and 112 or 0,
+        y = belt.y - 3 + flr(rnd(3)),
         dx = 0,
         dy = 0,
         size = 16,
@@ -44,51 +98,11 @@ function inside_entity(entity)
     return false
 end
 
-function update_entities()
-    for i = #Entities, 1, -1 do
-        local entity = Entities[i]
-
-        is_on_belt, belt_index = on_belt(entity)
-        entity.on_belt = is_on_belt and true or false
-        if belt_index ~= nil then
-            entity.dx = belts[belt_index].dx
-        else
-            entity.dx = 0
-        end
-
-        -- collision
-        -- if entity.x < 0 then entity.x = 0 end
-        -- if entity.y < 0 then entity.y = 0 end
-        -- if entity.x + entity.size > 127 then entity.x = 127 - entity.size  end
-        -- if entity.y + entity.size > 127 then entity.y = 127 - entity.size  end
-
-        -- dragging
-        if inside_entity(entity) and mouse_clicked("left") then
-            dragging = true
-            entity.x = mouse.x - 6
-            entity.y = mouse.y - 6
-            entity_selected = entity.id
-
-            del(Entities, entity)
-            add(Entities, entity)
-
-            mouse.mode = 2
-            break
-        else
-            if inside_area(entity.x + 8, entity.y + 8) then
-                del(Entities, entity)
-                add_explosion(entity.x + 8, entity.y + 8)
-            end
-            dragging = false
-            entity_selected = nil
-        end
-
-        entity.x = entity.x + entity.dx
-    end
-end
-
-function draw_entities()
-    for entity in all(Entities) do
-        spr(entity.sprite, entity.x, entity.y, 2, 2)
+function spawn_entities()
+    if spawn_rate <= 0 and not dragging then
+        add_entity()
+        spawn_rate = entity_spawn_rate
+    else
+        spawn_rate = spawn_rate - 1
     end
 end

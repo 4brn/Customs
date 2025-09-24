@@ -1,18 +1,17 @@
 local belt_sprites = {
-    start = 64,
-    horizontal = 66,
-    finish = 68,
+    start = 4,
+    horizontal = 6,
+    finish = 8,
 }
 local size = 16
-local belt_speed = 0.2
-local animation_delay = 10
+local belt_speed = 1
 
 function init_belts()
     belts = {}
-    -- generate_belt(10, flr(rnd(2)) == 1)
+    generate_belt(10, flr(rnd(2)) == 1)
     generate_belt(30, flr(rnd(2)) == 1)
     generate_belt(80, flr(rnd(2)) == 1)
-    -- generate_belt(100, flr(rnd(2)) == 1)
+    generate_belt(100, flr(rnd(2)) == 1)
 end
 
 function draw_belts()
