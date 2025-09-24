@@ -1,5 +1,5 @@
-local mouse_sprites = {1, 2, 3} -- 1 => normal, 2 => drag, 3 => point
-local buttons = {left = 1, right = 2, middle = 4}
+local MOUSE_SPRITES = {1, 2, 3} -- 1 => normal, 2 => drag, 3 => point
+local BUTTONS = {left = 1, right = 2, middle = 4}
 
 function init_mouse()
     mouse = {}
@@ -11,7 +11,7 @@ function init_mouse()
 end
 
 function mouse_clicked(button)
-    if mouse.state == buttons[button] then return true end
+    if mouse.state == BUTTONS[button] then return true end
     return false
 end
 
@@ -38,5 +38,5 @@ function update_mouse()
 end
 
 function draw_mouse()
-    spr(mouse_sprites[mouse.mode], mouse.x, mouse.y)
+    spr(MOUSE_SPRITES[mouse.mode], mouse.x, mouse.y)
 end

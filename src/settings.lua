@@ -1,21 +1,21 @@
-framerate = 60
-size = 16 -- pixels
+FRAMERATE = 60
+SIZE = 16 -- pixels
 
 -- Entity
-entity_spawn_rate = nil -- every second
-safe_sprites = {64}
-dangerous_sprites = {66, 68}
+ENTITY_SPAWN_RATE = nil -- every second
+SAFE_SPRITES = {64}
+DANGEROUS_SPRITES = {66, 68}
 
 -- Belt
-belt_speed = nil -- pixels moved each frame
-belt_sprites = {
+BELT_SPEED = nil -- pixels moved each frame
+BELT_SPRITES = {
     start = 4,
     horizontal = 6,
     finish = 8,
 }
 
 -- Difficulty
-difficulty = {
+DIFFICULTY = {
     baby = "baby",
     loser = "loser",
     easy = "easy",
@@ -24,19 +24,19 @@ difficulty = {
 
 function set_difficulty(level)
     if level == "baby" then
-        entity_spawn_rate = 3
-        belt_speed = 0.5
+        ENTITY_SPAWN_RATE = 3
+        BELT_SPEED = 0.5
     elseif level == "loser" then
-        entity_spawn_rate = 4
-        belt_speed = 0.7
+        ENTITY_SPAWN_RATE = 4
+        BELT_SPEED = 0.7
     elseif level == "easy" then
-        entity_spawn_rate = 4
-        belt_speed = 1
+        ENTITY_SPAWN_RATE = 4
+        BELT_SPEED = 1
     elseif level == "job" then
-        belt_speed = 1.2
-        entity_spawn_rate = 5
+        ENTITY_SPAWN_RATE = 5
+        BELT_SPEED = 1.2
     else
-        entity_spawn_rate = 4
-        belt_speed = 0.7
+        ENTITY_SPAWN_RATE = 4
+        BELT_SPEED = 0.7
     end
 end

@@ -1,7 +1,7 @@
 function init_entities()
     Entities = {}
 
-    spawn_delay = framerate / entity_spawn_rate
+    spawn_delay = FRAMERATE / ENTITY_SPAWN_RATE
     dragging = false
     entity_id_counter = 0
     entity_selected = nil
@@ -65,8 +65,8 @@ function add_entity(dangerous)
 
     -- random sprite based on dangerous (true or false)
     local sprite =  (flr(rnd(2)) + 1) == 1
-    and dangerous_sprites[flr(rnd(#dangerous_sprites)) + 1]
-    or safe_sprites[flr(rnd(#safe_sprites)) + 1]
+    and DANGEROUS_SPRITES[flr(rnd(#DANGEROUS_SPRITES)) + 1]
+    or SAFE_SPRITES[flr(rnd(#SAFE_SPRITES)) + 1]
 
     add(Entities, {
         id = entity_id_counter,
@@ -83,7 +83,7 @@ end
 
 function inside_entity(entity)
     if (mouse.x > entity.x and mouse.y > entity.y)
-        and (mouse.x < entity.x + size and mouse.y < entity.y + size) then
+        and (mouse.x < entity.x + SIZE and mouse.y < entity.y + SIZE) then
         mouse.mode = 3
         return true
     end
@@ -94,7 +94,7 @@ end
 function spawn_entities()
     if spawn_delay <= 0 and not dragging then
         add_entity()
-        spawn_delay = framerate / entity_spawn_rate
+        spawn_delay = FRAMERATE / ENTITY_SPAWN_RATE
     else
         spawn_delay = spawn_delay - 1
     end

@@ -1,10 +1,12 @@
+STATE = { }
+
 function _init()
     init_mouse()
     init_menu()
+
+    set_difficulty(DIFFICULTY.loser)
+
     init_debug()
-
-    set_difficulty(difficulty.job)
-
     init_belts()
     init_entities()
     init_areas()

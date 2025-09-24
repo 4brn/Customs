@@ -9,7 +9,7 @@ end
 function draw_belts()
     for belt in all(belts) do
         for tile in all(belt.tiles) do
-            spr(belt_sprites[tile.type], tile.x, belt.y, 2,2,belt.flipped)
+            spr(BELT_SPRITES[tile.type], tile.x, belt.y, 2,2,belt.flipped)
         end
     end
 end
@@ -24,20 +24,20 @@ function generate_belt(y, flipped)
     local finish
 
     if flipped then
-        iteration = size - (2*size)
+        iteration = -SIZE
         start = 112
         finish = 0
     else
         start = 0
         finish = 112
-        iteration = size
+        iteration = SIZE
     end
     -- WHY IS IT 112 INSTEAD OF 111 ??????????????
 
     belt.tiles = {}
     belt.y = y
     belt.flipped = flipped
-    belt.dx = flipped and -belt_speed or belt_speed
+    belt.dx = flipped and -BELT_SPEED or BELT_SPEED
     belt.dy = 0
 
     for i = start, finish, iteration do
