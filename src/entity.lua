@@ -17,7 +17,7 @@ function update_entities()
         local is_on_belt, belt_index = on_belt(entity)
         entity.on_belt = is_on_belt
         if is_on_belt and belt_index ~= nil then
-            entity.dx = belts[belt_index].dx
+            entity.dx = belts[belt_index].dx * DELTA
         else
             entity.dx = 0
         end

@@ -1,31 +1,31 @@
 FRAMERATE = 60
-DELTA = FRAMERATE == 60 and 1 or 0.5
-SIZE = 16 -- pixels
+DELTA = FRAMERATE < 60 and 2 or 1
+SIZE = 16 -- in pixels
 
 -- Difficulty
 DIFFICULTY = {
     [1] = {
-        name = "mon",
+        name = "monday",
         entity_spawn_rate = 2,
         belt_speed = 0.5
     },
     [2] = {
-        name = "tue",
+        name = "tuesday",
         entity_spawn_rate = 3,
         belt_speed = 0.7
     },
     [3] = {
-        name = "wed",
+        name = "wednesday",
         entity_spawn_rate = 4,
         belt_speed = 0.7
     },
     [4] = {
-        name = "thu",
+        name = "thursday",
         entity_spawn_rate = 5,
         belt_speed = 1
     },
     [5] = {
-        name = "fri",
+        name = "friday",
         entity_spawn_rate = 6,
         belt_speed = 1.2
     },
@@ -47,6 +47,6 @@ BELT_SPRITES = {
 -- Explosion
 EXPLOSION_COLORS = { 5, 9, 10, 7 }
 PARTICLE_COUNT = 20
-MAX_SCALE = 6
-LIFE = 5
-SUBTRACTION = 0.2
+LIFE = 6
+SUBTRACTION = 0.2 -- subtracted from LIFE each frame
+MAX_SCALE = 4
