@@ -2,7 +2,8 @@ function init_entities()
     Entities = {}
 
     passed_counter = 0
-    spawn_delay = FRAMERATE / ENTITY_SPAWN_RATE
+    spawn_rate = DAY[game.day].entity_spawn_rate
+    spawn_delay = FRAMERATE / spawn_rate
     dragging = false
     entity_id_counter = 0
     entity_selected = nil
@@ -96,7 +97,7 @@ end
 function spawn_entities()
     if spawn_delay <= 0 and not dragging then
         add_entity()
-        spawn_delay = FRAMERATE / ENTITY_SPAWN_RATE
+        spawn_delay = FRAMERATE / spawn_rate
     else
         spawn_delay = spawn_delay - 1
     end

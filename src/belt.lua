@@ -1,5 +1,6 @@
 function init_belts()
     belts = {}
+    belt_speed = DAY[game.day].belt_speed
     generate_belt(10, flr(rnd(2)) == 1)
     generate_belt(30, flr(rnd(2)) == 1)
     generate_belt(80, flr(rnd(2)) == 1)
@@ -37,7 +38,7 @@ function generate_belt(y, flipped)
     belt.tiles = {}
     belt.y = y
     belt.flipped = flipped
-    belt.dx = flipped and -BELT_SPEED or BELT_SPEED
+    belt.dx = flipped and -belt_speed or belt_speed
     belt.dy = 0
 
     for i = start, finish, iteration do

@@ -3,7 +3,7 @@ DELTA = FRAMERATE < 60 and 2 or 1
 SIZE = 16 -- in pixels
 
 -- Difficulty
-DIFFICULTY = {
+DAY = {
     [1] = {
         name = "monday",
         entity_spawn_rate = 2,
@@ -32,12 +32,11 @@ DIFFICULTY = {
 }
 
 -- Entity
-ENTITY_SPAWN_RATE = DIFFICULTY[1].entity_spawn_rate -- every second
 SAFE_SPRITES = {64}
 DANGEROUS_SPRITES = {66, 68}
 
+
 -- Belt
-BELT_SPEED = DIFFICULTY[1].belt_speed -- pixels moved each frame
 BELT_SPRITES = {
     start = 4,
     horizontal = 6,
