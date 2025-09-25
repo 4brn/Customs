@@ -11,19 +11,26 @@ local bitmap = {
 
 function init_debug()
     debug_active = false
+    menuitem(1, "debug: off", function()
+        debug_active = not debug_active
+        menuitem(nil, "debug: " .. (debug_active and "on" or "off"))
+        return true
+    end
+    )
 end
 
 function update_debug()
+    -- remove later
     if stat(31) == "d" then debug_active = not debug_active end
 end
 
 function draw_debug()
     if debug_active then
-        rectfill(0,0,127,20,0)
+        -- rectfill(0,0,127,20,0)
         mouse_data()
         explosion_data()
-        entity_data()
-        belt_data()
+        item_data()
+        game_data()
     end
 end
 
@@ -40,16 +47,14 @@ function explosion_data()
     print("reas:" .. #areas)
 end
 
-function entity_data()
+function item_data()
     cursor(57,2,7)
-    print("nttys:"..#Entities)
-    print("slctd:".. (entity_selected == nil and 0 or entity_selected))
+    print("items:"..#items)
+    print("slctd:".. (item_selected == nil and 0 or item_selected))
 end
 
-function belt_data()
+function game_data()
     cursor(97, 2, 7)
-    -- print(belt_info.index)
-    -- print(#belt_info.belt.tiles)
-    -- print(on_belt(mouse), 7)
-    -- print(Entities[1].on_belt, 7)
+    print("q:" .. game.score .. "/" .. game.quota)
+    print("e:" .. game.employment)
 end

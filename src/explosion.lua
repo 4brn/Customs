@@ -1,4 +1,11 @@
+EXPLOSION_COLORS = { 5, 9, 10, 7 }
+PARTICLE_COUNT = 20
+LIFE = 6
+SUBTRACTION = 0.2 -- subtracted from LIFE each frame
+MAX_SCALE = 4
+
 function init_explosion()
+
     explosion = {}
 end
 

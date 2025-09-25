@@ -6,7 +6,7 @@ function init_mouse()
     mouse.x = 64
     mouse.y = 64
     mouse.state = 0
-
+    mouse.dragging = false
     mouse.mode = 1
 end
 

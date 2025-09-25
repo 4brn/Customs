@@ -1,10 +1,17 @@
+BELT_SPRITES = {
+    start = 4,
+    horizontal = 6,
+    finish = 8,
+}
+
 function init_belts()
     belts = {}
-    belt_speed = DAY[game.day].belt_speed
-    generate_belt(10, flr(rnd(2)) == 1)
-    generate_belt(30, flr(rnd(2)) == 1)
-    generate_belt(80, flr(rnd(2)) == 1)
-    generate_belt(100, flr(rnd(2)) == 1)
+    speed = DIFFICULTY[game.day].speed
+
+    add(belts,generate_belt(10, flr(rnd(2)) == 1))
+    add(belts,generate_belt(30, flr(rnd(2)) == 1))
+    add(belts,generate_belt(80, flr(rnd(2)) == 1))
+    add(belts,generate_belt(100, flr(rnd(2)) == 1))
 end
 
 function draw_belts()
@@ -20,28 +27,23 @@ function generate_belt(y, flipped)
 
     local belt = {}
 
-    local iteration
-    local start
-    local finish
-
+    local iteration, start, finish
     if flipped then
-        iteration = -SIZE
+        step = -SIZE
         start = 112
         finish = 0
     else
         start = 0
         finish = 112
-        iteration = SIZE
+        step = SIZE
     end
-    -- WHY IS IT 112 INSTEAD OF 111 ??????????????
 
     belt.tiles = {}
     belt.y = y
     belt.flipped = flipped
-    belt.dx = flipped and -belt_speed or belt_speed
-    belt.dy = 0
+    belt.dx = flipped and -speed or speed
 
-    for i = start, finish, iteration do
+    for i = start, finish, step do
         local type
 
         if i == start then
@@ -54,12 +56,11 @@ function generate_belt(y, flipped)
 
         add(belt.tiles, {
             x = i,
-            -- y = y,
             type = type,
         })
     end
 
-    add(belts, belt)
+    return belt
 end
 
 function on_belt(obj)
