@@ -1,4 +1,4 @@
-BELT_SPRITES = {
+local BELT_SPRITES = {
     start = 4,
     horizontal = 6,
     finish = 8,
@@ -27,11 +27,11 @@ function generate_belt(y, flipped)
 
     local belt = {}
 
-    local iteration, start, finish
+    local step, start, finish
     if flipped then
-        step = -SIZE
         start = 112
         finish = 0
+        step = -SIZE
     else
         start = 0
         finish = 112
@@ -40,34 +40,28 @@ function generate_belt(y, flipped)
 
     belt.tiles = {}
     belt.y = y
+    belt.start = start
+    belt.finish = finish
     belt.flipped = flipped
     belt.dx = flipped and -speed or speed
 
     for i = start, finish, step do
         local type
 
-        if i == start then
-            type = "start"
-        elseif i == finish then
-            type = "finish"
-        else
-            type = "horizontal"
-        end
+        if i == start then type = "start"
+        elseif i == finish then type = "finish"
+        else type = "horizontal" end
 
-        add(belt.tiles, {
-            x = i,
-            type = type,
-        })
+        add(belt.tiles, { x = i, type = type, })
     end
 
     return belt
 end
 
-function on_belt(obj)
-    local y = obj.y
-    for index,belt in pairs(belts) do
-        if y + 8 > belt.y and y + 8 < belt.y + 16 then
-            return true, index
+function get_belt(obj)
+    for belt in all(belts) do
+        if mid(belt.y, obj.y + 8, belt.y + 16) == obj.y + 8 then
+            return true, belt
         end
     end
 

@@ -1,9 +1,9 @@
 pico-8 cartridge // http://www.pico-8.com
 version 43
 __lua__
-#include settings.lua
-
 #include main.lua
+#include difficulty.lua
+
 -- States
 #include menu.lua
 #include game.lua

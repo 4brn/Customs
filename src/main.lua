@@ -6,7 +6,7 @@ function _init()
         employment = 20,
     }
 
-    menu = "start"
+    menu = MENU.start
 
     init_mouse()
     menu_init()

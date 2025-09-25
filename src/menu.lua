@@ -1,31 +1,50 @@
+MENU = {
+    start = 1,
+    overview = 2,
+    survived = 3,
+    win = 4,
+    lose = 5,
+}
+
 function menu_init()
+    menu_delay = 10
+
     update = menu_update
     draw = menu_draw
 end
 
 function menu_update()
-    if btnp(4) then
-        if menu == "start" then
-            menu = "overview"
+    if menu_delay > 0 then
+        menu_delay = menu_delay - 1
+        return
+    end
+
+    if mouse_clicked("left") then
+        menu_delay = 10
+
+        if menu == MENU.start then
+            menu = MENU.overview
             return
         end
 
-        if menu == "overview" then
+        if menu == MENU.overview then
             game_init()
             return
         end
 
-        if menu == "survived" then
-            if game.day < 5 then
-                game.day = game.day + 1
-                menu = "overview"
-            else
-              menu = "win"
+        if menu == MENU.survived then
+
+            if game.day >= #DIFFICULTY then
+                menu = MENU.win
+                return
             end
+
+            game.day = game.day + 1
+            menu = MENU.overview
             return
         end
 
-        if menu == "lose" or "win" then
+        if menu == MENU.win or MENU.lose then
             _init()
             return
         end
@@ -34,30 +53,29 @@ end
 
 function menu_draw()
     cls()
-    if menu == "start" then
+    if menu == MENU.start then
         print("start", 7)
         return
     end
 
-    if menu == "overview" then
+    if menu == MENU.overview then
         print("day: " .. (game.day) , 7)
         print("quota: " .. DIFFICULTY[game.day].quota, 7)
         return
     end
 
-    if menu == "lose" then
+    if menu == MENU.lose then
         print("fired", 7)
         return
     end
 
-    if menu == "win" then
+    if menu == MENU.win then
         print("You survived the week", 7)
         return
     end
 
-    if menu == "survived" then
+    if menu == MENU.survived then
         print("survived", 7)
         return
     end
-
 end

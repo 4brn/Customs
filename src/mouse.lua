@@ -10,11 +10,6 @@ function init_mouse()
     mouse.mode = 1
 end
 
-function mouse_clicked(button)
-    if mouse.state == BUTTONS[button] then return true end
-    return false
-end
-
 function update_mouse()
     mouse.x = stat(32)
     mouse.y = stat(33)
@@ -24,19 +19,32 @@ function update_mouse()
     mouse.mode = mouse.state == 1 and 2 or 1
 
     -- mouse collision
-    if mouse.x < 0 then
-        mouse.x = 0
-    elseif mouse.x + 8 > 127 then
-        mouse.x = 127 - 8
-    end
-
-    if mouse.y < 0 then
-        mouse.y = 0
-    elseif mouse.y + 8 > 127 then
-        mouse.y = 127 - 8
-    end
+    mouse.x = mid(0, mouse.x, 120)
+    mouse.y = mid(0, mouse.y, 120)
 end
 
 function draw_mouse()
-    spr(MOUSE_SPRITES[mouse.mode], mouse.x, mouse.y)
+    spr(MOUSE_SPRITES[mouse.mode], mouse.x - 2, mouse.y)
+end
+
+function mouse_clicked(button, delay)
+    if mouse.state == BUTTONS[button] then
+        return true
+    end
+
+    return false
+end
+
+function mouse_inside_item(item)
+    -- whether mouse X is between the most left and most right of item X coords
+    local cond1 = mid(item.x, mouse.x, item.x + SIZE) == mouse.x
+    -- whether mouse X is between the most upper and lowest of item Y coords
+    local cond2 = mid(item.y, mouse.y, item.y + SIZE) == mouse.y
+
+    if cond1 and cond2 then
+        mouse.mode = 3
+        return true
+    end
+
+    return false
 end

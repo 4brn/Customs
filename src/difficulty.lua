@@ -1,13 +1,13 @@
 FRAMERATE = 60
 DELTA = FRAMERATE < 60 and 2 or 1
-SIZE = 16 -- in pixels
+SIZE = 16 -- 16 px
 
 DIFFICULTY = {
     [1] = {
         spawn_rate = 2,
         speed = 0.5,
         belts = 2,
-        quota = 1,
+        quota = 10,
     },
     [2] = {
         spawn_rate = 3,

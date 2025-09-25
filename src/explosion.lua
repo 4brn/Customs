@@ -5,7 +5,6 @@ SUBTRACTION = 0.2 -- subtracted from LIFE each frame
 MAX_SCALE = 4
 
 function init_explosion()
-
     explosion = {}
 end
 

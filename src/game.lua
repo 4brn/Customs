@@ -13,21 +13,14 @@ function game_init()
 end
 
 function game_update()
-    -- remove later
-    if btnp(4) then
-        menu = "lose"
-        menu_init()
-        return
-    end
-
     if game.score >= game.quota then
-        menu = "survived"
+        menu = MENU.survived
         menu_init()
         return
     end
 
     if game.employment <= 0 then
-        menu = "lose"
+        menu = MENU.lose
         menu_init()
         return
     end
@@ -35,7 +28,6 @@ function game_update()
     update_items()
     update_color()
     update_explosion()
-    update_debug()
 end
 
 function game_draw()
