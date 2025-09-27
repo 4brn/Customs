@@ -1,13 +1,22 @@
 MENU = {
     start = 1,
-    overview = 2,
-    survived = 3,
-    win = 4,
-    lose = 5,
+    email = 2,
+    overview = 3,
+    survived = 4,
+    win = 5,
+    lose = 6,
 }
+menu_delay_max = 50
 
 function menu_init()
-    menu_delay = 10
+    menu_delay = menu_delay_max
+    music = false
+
+    sfx(3, 1)
+
+    if menu == MENU.lose then
+        sfx(4, 1)
+    end
 
     update = menu_update
     draw = menu_draw
@@ -20,9 +29,20 @@ function menu_update()
     end
 
     if mouse_clicked("left") then
-        menu_delay = 10
+        menu_delay = menu_delay_max
+        sfx(1)
 
         if menu == MENU.start then
+            if game.day > 1 then
+                menu = MENU.overview
+                return
+            end
+
+            menu = MENU.email
+            return
+        end
+
+        if menu == MENU.email then
             menu = MENU.overview
             return
         end
@@ -33,7 +53,6 @@ function menu_update()
         end
 
         if menu == MENU.survived then
-
             if game.day >= #DIFFICULTY then
                 menu = MENU.win
                 return
@@ -54,28 +73,78 @@ end
 function menu_draw()
     cls()
     if menu == MENU.start then
-        print("start", 7)
+        cursor(15,57,7)
+        print("you have 1 new email!")
+        print("   click to read")
+        return
+    end
+
+    if menu == MENU.email then
+        print("subject: job offer\n", 7)
+        print("hello, friend")
+        print("we are pleased to inform you")
+        print("that you have been selected")
+        print("for the position of baggage")
+        print("handler at e-corp.\n")
+        print("please be present on monday")
+        print("for you first day of work.\n")
+        print("further details, regarding")
+        print("work details, and schedule")
+        print("will be given on monday.\n")
+        print("best regards,")
+        print("elliot alderson")
         return
     end
 
     if menu == MENU.overview then
-        print("day: " .. (game.day) , 7)
-        print("quota: " .. DIFFICULTY[game.day].quota, 7)
+        print("subject: day " .. game.day .. " ( " .. DIFFICULTY[game.day].name .. " )\n")
+
+        if game.day == 1 then
+            print("instructions:\n")
+            print("- oversee conveyor belts", 10)
+            print("- let red backpacks pass")
+            print("- remove dangerous/illegal items\n")
+            print("- 20 total mistakes", 10)
+            print("- must meet daily quota\n")
+            print("(that's how many backpacks", 7)
+            print(" you need to pass for the day)\n")
+            print("grabbing an item,stops time.", 3)
+            print("moving fast will drop items.\n", 8)
+        end
+
+        print("quota: " .. DIFFICULTY[game.day].quota .. " <--" .. "\n", 7)
+        print("good luck :)")
         return
     end
 
     if menu == MENU.lose then
-        print("fired", 7)
+        print("subject: job \n", 7)
+        print("you are fired!", 8)
+        print("go and find an easier job \n", 7)
+        print("worst regards,")
+        print("elliot alderson")
         return
     end
 
     if menu == MENU.win then
-        print("You survived the week", 7)
+        print("subject: performance review \n", 7)
+        print("hello, friend")
+        print("you did an outstanding job this week", 3)
+        print("unfortunately you are being let go", 7)
+        print("nothing personal kid.\n", 7)
+
+        print("best regards,")
+        print("elliot alderson")
         return
     end
 
     if menu == MENU.survived then
-        print("survived", 7)
+        print("subject: day " .. game.day .. " ( " .. DIFFICULTY[game.day].name .. " )\n", 7)
+        print("status: employed", 3)
+        print("quota: met \n", 3)
+        print("mistakes: " .. 20 - game.employment .. "/20\n", 7)
+        print("you survived.")
+        print("for now...")
         return
     end
 end

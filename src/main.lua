@@ -1,6 +1,10 @@
+FRAMERATE = 60
+DELTA = FRAMERATE < 60 and 2 or 1
+SIZE = 16 -- px
+
 function _init()
     game = {
-        day = 5,
+        day = 1,
         score = 0,
         quota = 0,
         employment = 20,

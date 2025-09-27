@@ -6,7 +6,7 @@ local COLORS = {
 
 function init_areas()
     areas = {}
-    add_area(44,51,40,20)
+    add_area(41,51,40,20)
 end
 
 function inside_area(x,y)

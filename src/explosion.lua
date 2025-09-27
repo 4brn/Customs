@@ -6,6 +6,7 @@ MAX_SCALE = 4
 
 function init_explosion()
     explosion = {}
+    subtraction = SUBTRACTION * DELTA
 end
 
 function add_explosion(x, y)
@@ -31,7 +32,7 @@ function update_explosion()
         p.x = p.x + p.dx
         p.y = p.y + p.dy
         p.scale = p.scale - SUBTRACTION
-        p.life = p.life - (SUBTRACTION * DELTA)
+        p.life = p.life - SUBTRACTION
         p.color = EXPLOSION_COLORS[flr(p.life)]
         if p.life <= 0 then
             del(explosion, p)

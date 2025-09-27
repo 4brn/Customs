@@ -1,5 +1,5 @@
 local SAFE_SPRITES = {64}
-local DANGEROUS_SPRITES = {66, 68}
+local DANGEROUS_SPRITES = {74,76,78,108}
 
 function init_items()
     items = {}
@@ -23,7 +23,7 @@ function update_items()
         local item = items[i]
         local on_belt, belt = get_belt(item)
 
-        item.dx = belt ~= nil and belt.dx * DELTA or 0
+        item.dx = belt ~= nil and belt.dx or 0
 
         -- dragging
         if mouse_inside_item(item) and mouse_clicked("left") then

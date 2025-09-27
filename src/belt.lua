@@ -7,17 +7,18 @@ local BELT_SPRITES = {
 function init_belts()
     belts = {}
     speed = DIFFICULTY[game.day].speed
+    local belt_count = DIFFICULTY[game.day].belts
 
-    add(belts,generate_belt(10, flr(rnd(2)) == 1))
-    add(belts,generate_belt(30, flr(rnd(2)) == 1))
-    add(belts,generate_belt(80, flr(rnd(2)) == 1))
-    add(belts,generate_belt(100, flr(rnd(2)) == 1))
+    if belt_count >= 3 then add(belts, generate_belt(10, flr(rnd(2)) == 1)) end
+    add(belts, generate_belt(30, flr(rnd(2)) == 1))
+    add(belts, generate_belt(80, flr(rnd(2)) == 1))
+    if belt_count >= 4 then add(belts, generate_belt(100, flr(rnd(2)) == 1)) end
 end
 
 function draw_belts()
     for belt in all(belts) do
         for tile in all(belt.tiles) do
-            spr(BELT_SPRITES[tile.type], tile.x, belt.y, 2,2,belt.flipped)
+            spr(BELT_SPRITES[tile.type], tile.x, belt.y, 2, 2, belt.flipped)
         end
     end
 end
@@ -48,9 +49,13 @@ function generate_belt(y, flipped)
     for i = start, finish, step do
         local type
 
-        if i == start then type = "start"
-        elseif i == finish then type = "finish"
-        else type = "horizontal" end
+        if i == start then
+            type = "start"
+        elseif i == finish then
+            type = "finish"
+        else
+            type = "horizontal"
+        end
 
         add(belt.tiles, { x = i, type = type, })
     end

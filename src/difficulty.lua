@@ -1,36 +1,37 @@
-FRAMERATE = 60
-DELTA = FRAMERATE < 60 and 2 or 1
-SIZE = 16 -- 16 px
-
 DIFFICULTY = {
     [1] = {
-        spawn_rate = 2,
+        name = "monday",
+        spawn_rate = 1,
         speed = 0.5,
         belts = 2,
-        quota = 10,
+        quota = 15,
     },
     [2] = {
-        spawn_rate = 3,
-        speed = 0.7,
-        belts = 3,
-        quota = 1,
+        name = "tuesday",
+        spawn_rate = 2,
+        speed = 0.8,
+        belts = 2,
+        quota = 30,
     },
     [3] = {
+        name = "wednesday",
         spawn_rate = 4,
-        speed = 0.7,
-        belts = 4,
-        quota = 1,
+        speed = 1,
+        belts = 3,
+        quota = 40,
     },
     [4] = {
+        name = "thursday",
         spawn_rate = 5,
         speed = 1,
         belts = 4,
-        quota = 1,
+        quota = 50,
     },
     [5] = {
+        name = "friday",
         spawn_rate = 6,
         speed = 1.2,
         belts = 4,
-        quota = 1,
+        quota = 60,
     },
 }
