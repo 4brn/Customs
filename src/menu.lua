@@ -73,9 +73,8 @@ end
 function menu_draw()
     cls()
     if menu == MENU.start then
-        cursor(15,57,7)
         print("you have 1 new email!")
-        print("   click to read")
+        print("click to read")
         return
     end
 
