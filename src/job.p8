@@ -8,7 +8,7 @@ __lua__
 #include menu.lua
 #include game.lua
 
--- misc
+-- input
 #include mouse.lua
 
 #include belt.lua

@@ -1,7 +1,5 @@
 # ICT Topics Research
 
-![banner](https://w.wallhaven.cc/full/47/wallhaven-47wpz3.png)
-
 **Name**: Aleksandar Rangelov \
 **Student Number**: 572601 \
 **Class**: STA-EN10
